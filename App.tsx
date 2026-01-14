@@ -27,6 +27,25 @@ const App: React.FC = () => {
     { label: 'Contact', href: '#contact' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      const headerOffset = 80; // Adjust for fixed header height + some padding
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   if (loading) {
     return <CyberCubeLoader />;
   }
@@ -34,11 +53,18 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#050505] text-gray-200 scanlines font-sans selection:bg-cyan-500 selection:text-black">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-md border-b border-gray-800 h-16">
+      <nav className="fixed top-0 left-0 right-0 z-[100] bg-[#050505]/90 backdrop-blur-md border-b border-gray-800 h-16">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
-          <div className="text-xl font-orbitron font-bold text-white tracking-widest">
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="text-xl font-orbitron font-bold text-white tracking-widest cursor-pointer"
+          >
             DEVESH <span className="text-cyan-500">MISHRA</span>
-          </div>
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex gap-8">
@@ -46,7 +72,8 @@ const App: React.FC = () => {
               <a 
                 key={item.label}
                 href={item.href}
-                className="text-sm font-mono text-gray-400 hover:text-cyan-400 transition-colors uppercase tracking-wider relative group"
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="text-sm font-mono text-gray-400 hover:text-cyan-400 transition-colors uppercase tracking-wider relative group cursor-pointer"
               >
                 <span className="relative z-10"> {item.label} </span>
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 group-hover:w-full transition-all duration-300" />
@@ -77,8 +104,8 @@ const App: React.FC = () => {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-gray-300 hover:text-cyan-400 font-mono block py-2 border-l-2 border-transparent hover:border-cyan-500 pl-4 transition-all"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="text-gray-300 hover:text-cyan-400 font-mono block py-2 border-l-2 border-transparent hover:border-cyan-500 pl-4 transition-all cursor-pointer"
                   >
                     {item.label}
                   </a>
@@ -100,9 +127,9 @@ const App: React.FC = () => {
 
       {/* Global CSS animation injections */}
       <style>{`
+        /* Removed scroll-padding-top here as we are handling it via JS for better control */
         html {
-          scroll-behavior: smooth;
-          scroll-padding-top: 5rem;
+          scroll-behavior: auto; /* Handled by JS to avoid conflicts */
         }
 
         @keyframes scan {
