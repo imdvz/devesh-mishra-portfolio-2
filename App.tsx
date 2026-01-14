@@ -37,7 +37,7 @@ const App: React.FC = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-md border-b border-gray-800 h-16">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="text-xl font-orbitron font-bold text-white tracking-widest">
-            DM<span className="text-cyan-500">.AI</span>
+            DEVESH <span className="text-cyan-500">MISHRA</span>
           </div>
 
           {/* Desktop Nav */}
@@ -100,6 +100,11 @@ const App: React.FC = () => {
 
       {/* Global CSS animation injections */}
       <style>{`
+        html {
+          scroll-behavior: smooth;
+          scroll-padding-top: 5rem;
+        }
+
         @keyframes scan {
           0% { top: 0%; opacity: 0; }
           50% { opacity: 1; }
@@ -165,8 +170,6 @@ const App: React.FC = () => {
           80% { clip: rect(23px, 9999px, 85px, 0); transform: skew(0.3deg); }
           85% { clip: rect(54px, 9999px, 84px, 0); transform: skew(0.3deg); }
           90% { clip: rect(45px, 9999px, 47px, 0); transform: skew(0.3deg); }
-          95% { clip: rect(37px, 9999px, 20px, 0); transform: skew(0.3deg); }
-          100% { clip: rect(4px, 9999px, 91px, 0); transform: skew(0.3deg); }
         }
         @keyframes glitch-anim2 {
           0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.3deg); }

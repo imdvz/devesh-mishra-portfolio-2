@@ -1,9 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CyberCubeLoader: React.FC = () => {
   // Generate 27 cubes (3x3x3 grid)
-  // Coordinates range from -1 to 1 for x, y, z
   const cubes = [];
   for (let z = -1; z <= 1; z++) {
     for (let y = -1; y <= 1; y++) {
@@ -16,6 +15,22 @@ const CyberCubeLoader: React.FC = () => {
   const CUBE_SIZE = 40; // Size of individual cubie
   const GAP = 4; // Gap between cubies
   const OFFSET = CUBE_SIZE + GAP;
+
+  const [loadingText, setLoadingText] = useState("INITIALIZING NEURAL NETWORKS...");
+
+  useEffect(() => {
+    const texts = [
+      "INITIALIZING NEURAL NETWORKS...",
+      "ESTABLISHING SECURE CONNECTION..."
+    ];
+    let i = 0;
+    // Slowed down to 2500ms (2.5 seconds) per text
+    const interval = setInterval(() => {
+      i = (i + 1) % texts.length;
+      setLoadingText(texts[i]);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#020005] overflow-hidden perspective-container">
@@ -46,7 +61,6 @@ const CyberCubeLoader: React.FC = () => {
             const isBottom = pos.y === 1;
             const isLeft = pos.x === -1;
             const isRight = pos.x === 1;
-            const isMiddleY = pos.y === 0;
             
             return (
               <motion.div
@@ -144,12 +158,23 @@ const CyberCubeLoader: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <h2 className="text-xl font-orbitron text-cyan-500 tracking-[0.3em] uppercase animate-pulse">
-          Building...
-        </h2>
+        <div className="h-8">
+           <AnimatePresence mode="wait">
+             <motion.h2 
+               key={loadingText}
+               initial={{ opacity: 0, y: 10 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: -10 }}
+               transition={{ duration: 0.5 }}
+               className="text-xl font-orbitron text-cyan-500 tracking-[0.2em] uppercase"
+             >
+               {loadingText}
+             </motion.h2>
+           </AnimatePresence>
+        </div>
         
         {/* Progress Bar */}
-        <div className="w-48 h-1 bg-gray-900 mt-4 relative overflow-hidden">
+        <div className="w-64 h-1 bg-gray-900 mt-4 relative overflow-hidden">
             <motion.div 
                 className="absolute top-0 left-0 h-full bg-gradient-to-r from-transparent via-purple-500 to-cyan-500"
                 animate={{ left: ['-100%', '100%'] }}
