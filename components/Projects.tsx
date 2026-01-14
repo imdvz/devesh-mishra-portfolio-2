@@ -2,6 +2,7 @@ import React from 'react';
 import Section from './Section';
 import { motion } from 'framer-motion';
 import { Code, ExternalLink, Zap } from 'lucide-react';
+import { useNotification } from '../context/NotificationContext';
 
 // Extracting projects from the resume achievements manually to highlight the best ones
 const HIGHLIGHT_PROJECTS = [
@@ -32,6 +33,8 @@ const HIGHLIGHT_PROJECTS = [
 ];
 
 const Projects: React.FC = () => {
+  const { showNotification } = useNotification();
+
   return (
     <Section id="projects" title="Project Modules">
       <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -45,7 +48,7 @@ const Projects: React.FC = () => {
             className="bg-black border border-gray-800 p-1 relative overflow-hidden group"
           >
             {/* Cyberpunk card interior */}
-            <div className="bg-gray-900/40 p-6 h-full border border-transparent group-hover:border-cyan-500/30 transition-all duration-300">
+            <div className="bg-gray-900/40 p-6 h-full border border-transparent group-hover:border-cyan-500/30 transition-all duration-300 flex flex-col">
               
               <div className="flex justify-between items-start mb-4">
                 <div className="p-2 bg-cyan-900/20 rounded border border-cyan-500/30">
@@ -64,7 +67,7 @@ const Projects: React.FC = () => {
                 {project.desc}
               </p>
               
-              <div className="mb-6 flex flex-wrap gap-2">
+              <div className="mb-6 flex flex-wrap gap-2 mt-auto">
                 {project.tech.map(t => (
                   <span key={t} className="text-xs font-mono text-gray-500 bg-gray-800 px-2 py-1 rounded">
                     {t}
@@ -72,13 +75,17 @@ const Projects: React.FC = () => {
                 ))}
               </div>
               
-              <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-800">
+              <div className="flex items-center justify-between pt-4 border-t border-gray-800">
                  <div className="flex items-center gap-2 text-yellow-400 text-sm font-bold font-mono">
                    <Zap size={14} />
                    {project.metric}
                  </div>
                  
-                 <button className="text-cyan-500 hover:text-white transition-colors">
+                 <button 
+                    onClick={() => showNotification("PROTOCOL NOT YET PUBLIC. MODULE IS CONSISTENTLY BUILDING...")}
+                    className="text-cyan-500 hover:text-white transition-colors p-2 hover:bg-cyan-500/10 rounded"
+                    title="View Source"
+                 >
                    <ExternalLink size={18} />
                  </button>
               </div>

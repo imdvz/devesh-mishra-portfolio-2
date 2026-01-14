@@ -3,10 +3,12 @@ import { RESUME_DATA } from '../constants';
 import { Terminal, Cpu, Database, Brain } from 'lucide-react';
 import GlitchText from './GlitchText';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useNotification } from '../context/NotificationContext';
 
 const Hero: React.FC = () => {
   const [textIndex, setTextIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { showNotification } = useNotification();
   
   // Parallax configuration
   const { scrollY } = useScroll();
@@ -26,6 +28,11 @@ const Hero: React.FC = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleProtocolsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    showNotification("SYSTEM UPGRADE IN PROGRESS. PROTOCOLS ARE CONSISTENTLY BUILDING...");
+  };
 
   return (
     <div ref={containerRef} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
@@ -73,12 +80,12 @@ const Hero: React.FC = () => {
               <span className="relative z-10">Connect LinkedIn</span>
               <div className="absolute inset-0 h-full w-full bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </a>
-            <a 
-              href="#projects"
+            <button 
+              onClick={handleProtocolsClick}
               className="px-6 py-3 bg-transparent border border-purple-500 text-purple-400 font-orbitron hover:shadow-[0_0_15px_#bc13fe] transition-all duration-300 uppercase tracking-wider backdrop-blur-sm"
             >
               View Protocols
-            </a>
+            </button>
           </div>
         </div>
         

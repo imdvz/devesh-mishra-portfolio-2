@@ -1,6 +1,7 @@
 import React from 'react';
 import { RESUME_DATA } from '../constants';
 import { Mail, Linkedin, Github, Phone } from 'lucide-react';
+import { useNotification } from '../context/NotificationContext';
 
 const Contact: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const Contact: React.FC = () => {
           Looking forward to building the next generation of AI solutions.
         </p>
         
-        <div className="flex justify-center gap-6 mb-12">
+        <div className="flex justify-center gap-6 mb-12 flex-wrap">
            <SocialLink href={`mailto:${RESUME_DATA.personalInfo.email}`} icon={<Mail />} label="Email" />
            <SocialLink href={RESUME_DATA.personalInfo.linkedin} icon={<Linkedin />} label="LinkedIn" />
            <SocialLink href={RESUME_DATA.personalInfo.github} icon={<Github />} label="GitHub" />
@@ -33,17 +34,30 @@ const Contact: React.FC = () => {
   );
 };
 
-const SocialLink: React.FC<{ href: string; icon: React.ReactNode; label: string }> = ({ href, icon, label }) => (
-  <a 
-    href={href}
-    target="_blank"
-    rel="noreferrer"
-    className="p-4 bg-gray-900 border border-gray-800 text-gray-400 hover:text-cyan-400 hover:border-cyan-500 hover:shadow-[0_0_15px_#00f3ff] transition-all duration-300 rounded-sm group relative"
-    aria-label={label}
-  >
-    <div className="relative z-10">{icon}</div>
-    <div className="absolute inset-0 bg-cyan-500/10 scale-0 group-hover:scale-100 transition-transform duration-300" />
-  </a>
-);
+const SocialLink: React.FC<{ href: string; icon: React.ReactNode; label: string }> = ({ href, icon, label }) => {
+  const { showNotification } = useNotification();
+
+  const handleClick = (e: React.MouseEvent) => {
+    // If href is empty, #, or just mailto:/tel: with no data, show popup
+    if (!href || href === '#' || href === 'mailto:' || href === 'tel:') {
+      e.preventDefault();
+      showNotification("COMMUNICATION LINK UNDER MAINTENANCE. PLEASE TRY ANOTHER CHANNEL.");
+    }
+  };
+
+  return (
+    <a 
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      onClick={handleClick}
+      className="p-4 bg-gray-900 border border-gray-800 text-gray-400 hover:text-cyan-400 hover:border-cyan-500 hover:shadow-[0_0_15px_#00f3ff] transition-all duration-300 rounded-sm group relative"
+      aria-label={label}
+    >
+      <div className="relative z-10">{icon}</div>
+      <div className="absolute inset-0 bg-cyan-500/10 scale-0 group-hover:scale-100 transition-transform duration-300" />
+    </a>
+  );
+};
 
 export default Contact;
