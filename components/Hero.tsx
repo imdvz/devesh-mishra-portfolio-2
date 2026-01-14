@@ -29,17 +29,11 @@ const Hero: React.FC = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Background Grids with Parallax */}
-      <motion.div 
-        style={{ y: backgroundY, opacity: backgroundOpacity }}
-        className="absolute inset-0 bg-[linear-gradient(rgba(0,243,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,243,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" 
-      />
-      
-      {/* Secondary Depth Layer */}
-       <motion.div
-        style={{ y: useTransform(scrollY, [0, 1000], [0, 200]), opacity: backgroundOpacity }}
-        className="absolute inset-0 bg-[radial-gradient(rgba(188,19,254,0.05)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"
-      />
+      {/* 
+         Removed local background layers so the global App.tsx background is visible.
+         Added a slight gradient overlay at the bottom to blend content.
+      */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#020005] to-transparent z-10 pointer-events-none" />
       
       <div className="container mx-auto px-4 z-10 grid md:grid-cols-2 gap-12 items-center">
         {/* Left Column: Text Info */}
@@ -65,7 +59,7 @@ const Hero: React.FC = () => {
              &gt; {titles[textIndex]}<span className="animate-pulse">_</span>
           </div>
           
-          <p className="text-gray-400 max-w-lg mb-8 leading-relaxed border-l-2 border-purple-500 pl-4 bg-purple-900/10 p-4 rounded-r">
+          <p className="text-gray-400 max-w-lg mb-8 leading-relaxed border-l-2 border-purple-500 pl-4 bg-purple-900/10 p-4 rounded-r backdrop-blur-sm">
             {RESUME_DATA.personalInfo.summary}
           </p>
           
@@ -81,7 +75,7 @@ const Hero: React.FC = () => {
             </a>
             <a 
               href="#projects"
-              className="px-6 py-3 bg-transparent border border-purple-500 text-purple-400 font-orbitron hover:shadow-[0_0_15px_#bc13fe] transition-all duration-300 uppercase tracking-wider"
+              className="px-6 py-3 bg-transparent border border-purple-500 text-purple-400 font-orbitron hover:shadow-[0_0_15px_#bc13fe] transition-all duration-300 uppercase tracking-wider backdrop-blur-sm"
             >
               View Protocols
             </a>

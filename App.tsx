@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CyberCubeLoader from './components/CyberCubeLoader';
+import CyberpunkBackground from './components/CyberpunkBackground';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
@@ -51,9 +52,13 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-gray-200 scanlines font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen text-gray-200 scanlines font-sans selection:bg-cyan-500 selection:text-black relative overflow-hidden bg-[#020005]">
+      
+      {/* NEW ANIMATED BACKGROUND */}
+      <CyberpunkBackground />
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] bg-[#050505]/90 backdrop-blur-md border-b border-gray-800 h-16">
+      <nav className="fixed top-0 left-0 right-0 z-[100] bg-[#050505]/80 backdrop-blur-md border-b border-gray-800/50 h-16 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <a 
             href="#" 
@@ -61,9 +66,10 @@ const App: React.FC = () => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="text-xl font-orbitron font-bold text-white tracking-widest cursor-pointer"
+            className="text-xl font-orbitron font-bold text-white tracking-widest cursor-pointer group flex items-center gap-2"
           >
-            DEVESH <span className="text-cyan-500">MISHRA</span>
+            <div className="w-3 h-3 bg-cyan-500 rotate-45 group-hover:animate-spin" />
+            DEVESH <span className="text-cyan-500 group-hover:text-cyan-400 transition-colors">MISHRA</span>
           </a>
 
           {/* Desktop Nav */}
@@ -76,14 +82,14 @@ const App: React.FC = () => {
                 className="text-sm font-mono text-gray-400 hover:text-cyan-400 transition-colors uppercase tracking-wider relative group cursor-pointer"
               >
                 <span className="relative z-10"> {item.label} </span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_#00f3ff]" />
               </a>
             ))}
           </div>
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden text-cyan-500"
+            className="md:hidden text-cyan-500 hover:text-white transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X /> : <Menu />}
@@ -97,7 +103,7 @@ const App: React.FC = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden bg-gray-900 border-b border-gray-800 overflow-hidden"
+              className="md:hidden bg-gray-900/95 border-b border-gray-800 overflow-hidden backdrop-blur-xl"
             >
               <div className="flex flex-col p-4 gap-4">
                 {navItems.map((item) => (
@@ -127,9 +133,8 @@ const App: React.FC = () => {
 
       {/* Global CSS animation injections */}
       <style>{`
-        /* Removed scroll-padding-top here as we are handling it via JS for better control */
         html {
-          scroll-behavior: auto; /* Handled by JS to avoid conflicts */
+          scroll-behavior: auto;
         }
 
         @keyframes scan {
@@ -147,6 +152,10 @@ const App: React.FC = () => {
         
         .backface-hidden {
           backface-visibility: hidden;
+        }
+        
+        .backface-visible {
+          backface-visibility: visible;
         }
 
         .clip-path-hexagon {
