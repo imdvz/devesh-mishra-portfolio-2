@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CyberCubeLoader from './components/CyberCubeLoader';
+import CyberpunkBackground from './components/CyberpunkBackground';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
@@ -52,39 +53,28 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen text-gray-200 scanlines font-sans selection:bg-cyan-500 selection:text-black relative overflow-hidden bg-[#020005]">
-      {/* GLOBAL BACKGROUND LAYER */}
-      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+      
+      {/* NEW DYNAMIC BACKGROUND */}
+      <CyberpunkBackground />
+
+      {/* GLOBAL OVERLAYS (Scanlines, Vignette, Noise) */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
         
-        {/* Hexagonal Mesh Pattern */}
-        <div className="absolute inset-0 opacity-20" 
-             style={{ 
-               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%2300f3ff' fill-opacity='0.2' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-               backgroundSize: '56px 98px'
-             }} 
-        />
-
-        {/* Strong Atmospheric Glows */}
-        <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-purple-900/30 blur-[150px] rounded-full mix-blend-screen animate-pulse-slow translate-x-[-30%] translate-y-[-30%]" />
-        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-cyan-900/20 blur-[150px] rounded-full mix-blend-screen animate-pulse-slow translate-x-[30%] translate-y-[30%]" style={{ animationDelay: '4s' }} />
-
-        {/* Moving Circuit Lines */}
-        <div className="absolute inset-0">
-           {/* Horizontal Line Moving Down */}
-           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50 animate-scan-line" />
-           
-           {/* Vertical Line Moving Right */}
-           <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-transparent via-purple-500 to-transparent opacity-50 animate-scan-line-vertical" />
+        {/* Moving Circuit Lines - Kept for extra detail */}
+        <div className="absolute inset-0 z-0 opacity-30">
+           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-scan-line" />
+           <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-scan-line-vertical" />
         </div>
 
         {/* Digital Noise Texture (Grain) */}
-        <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" 
+        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" 
              style={{ 
                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
              }} 
         />
 
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020005_90%)]" />
+        {/* Heavy Vignette to focus center */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,#020005_100%)]" />
       </div>
 
       {/* Navigation */}
@@ -153,7 +143,7 @@ const App: React.FC = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="relative z-0">
+      <main className="relative z-10">
         <Hero />
         <Experience />
         <Skills />
