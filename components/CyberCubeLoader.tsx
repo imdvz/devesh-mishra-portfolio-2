@@ -28,7 +28,7 @@ const CyberCubeLoader: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setLoadingState((prev) => (prev + 1) % loadingStates.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -47,7 +47,7 @@ const CyberCubeLoader: React.FC = () => {
             rotateY: [45, 225, 225, 405, 405],
           }}
           transition={{
-            duration: 6,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
             times: [0, 0.4, 0.5, 0.9, 1]
@@ -125,7 +125,7 @@ const CyberCubeLoader: React.FC = () => {
                   ]
                 }}
                 transition={{
-                  duration: 6,
+                  duration: 8,
                   repeat: Infinity,
                   ease: "easeInOut",
                   times: [0, 0.1, 0.25, 0.45, 0.55, 0.75, 1],

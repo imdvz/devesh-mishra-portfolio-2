@@ -16,7 +16,7 @@ const App: React.FC = () => {
     // Simulate loading assets
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2800); // 2.8 seconds loader
+    }, 3500); // 3.5 seconds loader
     return () => clearTimeout(timer);
   }, []);
 
