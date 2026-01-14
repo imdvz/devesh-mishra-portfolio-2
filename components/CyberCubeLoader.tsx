@@ -145,7 +145,7 @@ const CyberCubeLoader: React.FC = () => {
         animate={{ opacity: 1 }}
       >
         <h2 className="text-xl font-orbitron text-cyan-500 tracking-[0.3em] uppercase animate-pulse">
-          Constructing Matrix
+          Building...
         </h2>
         
         {/* Progress Bar */}
