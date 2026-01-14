@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
              &gt; {titles[textIndex]}<span className="animate-pulse">_</span>
           </div>
           
-          <p className="text-gray-400 max-w-lg mb-8 leading-relaxed border-l-2 border-purple-500 pl-4 bg-purple-900/10 p-4 rounded-r backdrop-blur-sm">
+          <p className="text-gray-300 text-lg max-w-2xl mb-8 leading-relaxed border-l-2 border-purple-500 pl-4 bg-purple-900/10 p-4 rounded-r backdrop-blur-sm">
             {RESUME_DATA.personalInfo.summary}
           </p>
           

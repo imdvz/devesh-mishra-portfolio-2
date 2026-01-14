@@ -40,7 +40,7 @@ const ExperienceCard: React.FC<{ job: typeof RESUME_DATA.experience[0], index: n
           </motion.h3>
           <motion.h4 layout="position" className="text-lg text-purple-400 font-bold mb-2">{job.company}</motion.h4>
 
-          <motion.div layout="position" className={`flex flex-wrap gap-4 text-sm text-gray-400 font-mono mb-4 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+          <motion.div layout="position" className={`flex flex-wrap gap-4 text-base text-gray-400 font-mono mb-4 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
             <div className="flex items-center gap-1">
               <Calendar size={14} /> {job.period}
             </div>
@@ -49,7 +49,7 @@ const ExperienceCard: React.FC<{ job: typeof RESUME_DATA.experience[0], index: n
             </div>
           </motion.div>
 
-          <ul className="space-y-2 text-gray-300 text-sm text-left">
+          <ul className="space-y-2 text-gray-300 text-base text-left">
             {/* Always show first N achievements */}
             {job.achievements.slice(0, INITIAL_VISIBLE_COUNT).map((achievement, i) => (
               <motion.li layout="position" key={`base-${i}`} className="flex items-start gap-2">
@@ -89,7 +89,7 @@ const ExperienceCard: React.FC<{ job: typeof RESUME_DATA.experience[0], index: n
             <motion.button
               layout="position"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-4 flex items-center gap-2 text-xs font-mono text-cyan-500 hover:text-white transition-colors uppercase tracking-widest group/btn"
+              className="mt-4 flex items-center gap-2 text-sm font-mono text-cyan-500 hover:text-white transition-colors uppercase tracking-widest group/btn"
             >
                <Terminal size={14} />
                {isExpanded ? 'COLLAPSE_DATA' : 'ACCESS_FULL_LOGS'}

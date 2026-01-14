@@ -63,20 +63,20 @@ const Projects: React.FC = () => {
                 {project.title}
               </h3>
               
-              <p className="text-gray-400 mb-6 text-sm leading-relaxed">
+              <p className="text-gray-300 mb-6 text-base leading-relaxed">
                 {project.desc}
               </p>
               
               <div className="mb-6 flex flex-wrap gap-2 mt-auto">
                 {project.tech.map(t => (
-                  <span key={t} className="text-xs font-mono text-gray-500 bg-gray-800 px-2 py-1 rounded">
+                  <span key={t} className="text-sm font-mono text-gray-500 bg-gray-800 px-2 py-1 rounded">
                     {t}
                   </span>
                 ))}
               </div>
               
               <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                 <div className="flex items-center gap-2 text-yellow-400 text-sm font-bold font-mono">
+                 <div className="flex items-center gap-2 text-yellow-400 text-base font-bold font-mono">
                    <Zap size={14} />
                    {project.metric}
                  </div>

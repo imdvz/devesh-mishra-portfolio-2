@@ -13,7 +13,7 @@ const Contact: React.FC = () => {
           <span className="text-cyan-500">Initiate</span> Connection
         </h2>
         
-        <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
           Available for collaborations in GenAI, RAG Systems, and Machine Learning architecture.
           Looking forward to building the next generation of AI solutions.
         </p>
@@ -25,7 +25,7 @@ const Contact: React.FC = () => {
            <SocialLink href={`tel:${RESUME_DATA.personalInfo.phone}`} icon={<Phone />} label="Phone" />
         </div>
         
-        <div className="text-gray-600 font-mono text-xs">
+        <div className="text-gray-600 font-mono text-sm">
           <p>© {new Date().getFullYear()} DEVESH MISHRA. ALL RIGHTS RESERVED.</p>
           <p className="mt-2">SYSTEM.VER.2.0.24 // CYBERPUNK_THEME</p>
         </div>
