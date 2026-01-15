@@ -17,7 +17,8 @@ const ExperienceCard: React.FC<{ job: typeof RESUME_DATA.experience[0], index: n
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className={`flex flex-col md:flex-row gap-8 relative ${isEven ? 'md:text-right' : 'md:flex-row-reverse'}`}
+      // Removed gap-8 to ensure elements can reach the outer edges of the container
+      className={`flex flex-col md:flex-row relative ${isEven ? 'md:text-right' : 'md:flex-row-reverse'}`}
     >
       {/* Spacer for timeline layout */}
       <div className="hidden md:block w-1/2" />
@@ -26,7 +27,15 @@ const ExperienceCard: React.FC<{ job: typeof RESUME_DATA.experience[0], index: n
       <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-black border-2 border-cyan-500 rounded-full transform md:-translate-x-1/2 mt-1.5 z-10 shadow-[0_0_10px_#00f3ff]" />
 
       {/* Content Card */}
-      <div className={`w-full md:w-1/2 pl-8 md:pl-0 ${isEven ? 'md:pr-12' : 'md:pl-12'}`}>
+      {/* 
+         Logic Update:
+         - Mobile: pl-8 to allow space for the line on the left.
+         - Desktop (md):
+           - Reset mobile padding (md:pl-0).
+           - isEven (Right Side): Add padding LEFT (pl-5) for spine clearance (Reduced from 12 to 5 to widen box towards center). 
+           - !isEven (Left Side): Add padding RIGHT (pr-5) for spine clearance (Reduced from 12 to 5 to widen box towards center).
+      */}
+      <div className={`w-full md:w-1/2 pl-8 md:pl-0 ${isEven ? 'md:pl-5' : 'md:pr-5'}`}>
         <motion.div
           layout
           className="bg-gray-900/80 border border-gray-700 p-6 relative hover:border-purple-500 transition-colors duration-300 group overflow-hidden"
@@ -115,7 +124,10 @@ const ExperienceCard: React.FC<{ job: typeof RESUME_DATA.experience[0], index: n
 
 const Experience: React.FC = () => {
   return (
-    <Section id="experience" title="Execution History">
+    <Section 
+      id="experience" 
+      title="Execution History"
+    >
       <div className="relative">
         {/* Vertical Line */}
         <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gray-800 transform md:-translate-x-1/2 hidden md:block" />
