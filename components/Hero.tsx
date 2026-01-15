@@ -16,16 +16,16 @@ const Hero: React.FC = () => {
   const backgroundOpacity = useTransform(scrollY, [0, 500], [1, 0.2]);
   
   const titles = [
-    "Data Scientist",
     "Machine Learning Engineer",
-    "AI Specialist",
-    "RAG & LLM Expert"
+    "AI Engineer",
+    "RAG & LLMs Specialist",
+    "Data Scientist"
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTextIndex((prev) => (prev + 1) % titles.length);
-    }, 3000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
